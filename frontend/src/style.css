@@ -1,0 +1,1095 @@
+/* ==========================
+Root & Global Styles
+========================== */
+:root {
+    --color-primary: #4facfe;
+    --color-secondary: #00f2fe;
+    --color-bg: #f4f7f9;
+    --color-text: #333;
+    --color-card: #fff;
+    --color-error-bg: #ffebee;
+    --color-error-text: #c62828;
+    --color-error-border: #ef9a9a;
+    --radius: 12px;
+    --transition: 0.3s ease;
+    --font-sans: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    /* For focus rings, convert primary color to RGB for rgba() */
+    --color-primary-rgb: 79, 172, 254;
+}
+
+/* Reset & Base */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+body {
+    font-family: var(--font-sans);
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    line-height: 1.6;
+    min-height: 100vh;
+}
+
+a {
+    color: var(--color-primary);
+    text-decoration: none;
+    transition: color var(--transition);
+}
+a:hover {
+    color: var(--color-secondary);
+    text-decoration: underline;
+}
+
+/* ==========================
+Layout Containers
+========================== */
+.app-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    padding: 0; /* Padding handled by app-main */
+}
+
+/* Full-width background elements */
+.app-header,
+.app-footer {
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    text-align: center;
+    color: #fff;
+}
+
+.app-header {
+    background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+    padding: 2rem 0; /* Vertical padding */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    /* Added min-height to ensure space even with minimal content */
+    min-height: 150px; /* Example min-height */
+    display: flex; /* Use flex to center content vertically */
+    flex-direction: column;
+    justify-content: center; /* Center content vertically */
+    align-items: center; /* Center content horizontally */
+}
+/* Header text - style it to match the image */
+.app-header h1 {
+    font-size: 2.5rem; /* Larger font size */
+    color: #fff; /* White color */
+    margin-bottom: 0.5rem; /* Space below heading */
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.1); /* Subtle shadow */
+}
+.app-header p {
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.9); /* Slightly transparent white */
+    margin-bottom: 0;
+}
+
+
+/* NAVBAR STYLES - ENHANCED FROSTED GLASS EFFECT */
+.navbar {
+    display: inline-flex; /* Use inline-flex to wrap the element itself */
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1.5rem;
+    flex-wrap: wrap; /* Allow items to wrap on smaller screens */
+
+    /* Frosted glass effect with subtle gradient */
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.28) 0%, rgba(255, 255, 255, 0.18) 100%);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+
+    padding: 0.8rem 1.6rem; /* Slightly more padding for a premium feel */
+    border-radius: 16px; /* Softer, larger radius */
+
+    /* Enhanced illumination and shadow for realism */
+    border: 1px solid rgba(255, 255, 255, 0.25); /* Defines the glass edge */
+    box-shadow:
+        /* Soft outer shadow, slightly colored by primary for integration */
+        0 8px 26px -6px rgba(var(--color-primary-rgb), 0.22),
+        /* Inner top highlight for "shine" as light catches the edge */
+        inset 0 1.5px 1px rgba(255, 255, 255, 0.5),
+        inset 0 -1px 1px rgba(0, 0, 0, 0.03); /* Subtle inner bottom shadow */
+
+    position: relative; /* Good practice for elements with box-shadow and children */
+}
+
+.navbar a {
+    padding: 0.5rem 1.25rem;
+    border-radius: 10px; /* Matched or slightly smaller than navbar radius factor */
+    background: transparent;
+    color: #fff;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: background var(--transition), transform var(--transition), color var(--transition), box-shadow 0.2s ease-out;
+    text-decoration: none;
+    display: inline-block; /* Ensure padding and transform work */
+}
+
+.navbar a:hover {
+    background: rgba(255, 255, 255, 0.38); /* Slightly more opaque on hover to stand out */
+    transform: translateY(-2px) scale(1.03); /* Subtle lift and scale */
+    color: #fff; /* Keep color white on hover for glass effect */
+    text-decoration: none;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.08); /* Subtle shadow for the button itself */
+}
+
+/* Style for active/current link */
+.navbar a.active {
+    background: rgba(255, 255, 255, 0.5); /* More prominent background for active */
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    pointer-events: none; /* Cannot click active link */
+}
+/* END OF NAVBAR MODIFICATIONS */
+
+
+.app-main {
+    flex: 1; /* Allows the main content area to grow */
+    padding: 2rem 1rem; /* Padding for content within the max-width container */
+    width: 100%; /* Takes full width of the parent (app-container max-width) */
+}
+
+.app-footer {
+    background: var(--color-primary);
+    padding: 1.25rem 0;
+    font-size: 0.9rem;
+    color: #fff; /* Explicitly ensure footer text is white */
+}
+
+/* ==========================
+Home Page (hero + features)
+========================== */
+.home-page {
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+}
+
+.hero {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 2rem;
+    background: #fff;
+    border-radius: var(--radius);
+    padding: 3rem; /* Uniform padding */
+    box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+}
+.hero-content {
+    flex: 1 1 320px; /* Allow content to grow, but have a base width */
+    min-width: 0; /* Prevent flex item from overflowing */
+}
+.hero-content h1 {
+    font-size: 2.75rem;
+    margin-bottom: 1rem;
+    color: var(--color-primary);
+}
+.hero-content p {
+    font-size: 1.125rem;
+    margin-bottom: 2rem;
+    color: var(--color-text);
+}
+.btn-primary {
+    display: inline-block;
+    padding: 0.75rem 1.75rem;
+    background: var(--color-primary);
+    color: #fff;
+    border: none;
+    border-radius: var(--radius);
+    font-weight: 600;
+    transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none; /* Ensure no underline on button links */
+}
+.btn-primary:hover:not(:disabled) {
+    background: var(--color-secondary);
+    color: var(--color-text); /* Or keep white if secondary gradient is light */
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+.btn-primary:disabled {
+    background-color: #b0bec5;
+    color: #78909c;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+.hero-graphic {
+    flex: 1 1 280px; /* Allow graphic to grow, but have a base width */
+    text-align: center;
+    min-width: 0; /* Prevent flex item from overflowing */
+}
+.hero-graphic img {
+    max-width: 300px;
+    width: 100%; /* Make image responsive */
+    height: auto;
+    margin: 0 auto;
+    display: block; /* Remove extra space below image */
+}
+
+.features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); /* Adjusted minmax for flexibility */
+    gap: 2rem;
+}
+.feature-card {
+    background: #fff;
+    border-radius: var(--radius);
+    padding: 2rem 1.5rem;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    transition: transform var(--transition), box-shadow var(--transition);
+    display: flex; /* Use flex for internal centering */
+    flex-direction: column;
+    align-items: center; /* Center content horizontally */
+    justify-content: center; /* Center content vertically */
+}
+.feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+}
+.feature-icon {
+    width: 48px;
+    height: 48px;
+    margin-bottom: 1rem;
+    color: var(--color-primary);
+}
+.feature-card h3 {
+    font-size: 1.25rem;
+    margin-bottom: 0.75rem;
+    color: var(--color-text);
+}
+.feature-card p {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 0;
+}
+
+
+.calltoaction {
+    background: linear-gradient(135deg, var(--color-secondary), var(--color-primary)); /* Added gradient */
+    color: #fff;
+    text-align: center;
+    padding: 3.5rem 2rem; /* Increased padding */
+    border-radius: var(--radius);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+}
+.calltoaction h2 {
+    font-size: 2.5rem; /* Larger font */
+    margin-bottom: 1.5rem;
+    color: #fff; /* Ensure white text on the gradient background */
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+}
+.calltoaction p {
+    font-size: 1.15rem;
+    margin-bottom: 2rem;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.btn-secondary {
+    display: inline-block;
+    padding: 0.75rem 1.75rem;
+    background: #fff;
+    color: var(--color-primary); /* Use primary color for text */
+    border-radius: var(--radius);
+    font-weight: 600;
+    transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
+    text-decoration: none;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Add subtle shadow */
+}
+.btn-secondary:hover {
+    background: #e0e0e0; /* Slightly darker grey on hover */
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+}
+
+/* ==========================
+Recommendations Page Styles
+========================== */
+.recommendations-container {
+    display: block; /* Or flex-column if needed for layout */
+    margin-top: 1.5rem; /* Add some space at the top */
+}
+
+.recommendations-container h2 {
+    text-align: center;
+    font-size: 2.25rem;
+    color: var(--color-text); /* Changed to text color based on common site header style */
+    margin-bottom: 0.75rem;
+}
+
+.page-subtitle {
+    text-align: center;
+    font-size: 1.05rem;
+    color: #555;
+    margin-bottom: 2.5rem;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.form-container {
+    background-color: var(--color-card);
+    padding: 1.5rem 2rem;
+    border-radius: var(--radius);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    margin-bottom: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.form-container div {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-container label {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    color: var(--color-text);
+}
+
+.form-container input[type="text"],
+.form-container textarea.detailed-expectations-textarea {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1px solid #d1d5db;
+    border-radius: calc(var(--radius) / 1.5);
+    font-size: 1rem;
+    color: var(--color-text);
+    background-color: #fff;
+    transition: border-color var(--transition), box-shadow var(--transition);
+    font-family: inherit;
+    line-height: 1.5;
+}
+
+.form-container textarea.detailed-expectations-textarea {
+    min-height: 80px;
+    resize: vertical;
+}
+
+.form-container input[type="text"]::placeholder,
+.form-container textarea.detailed-expectations-textarea::placeholder {
+    color: #9ca3af;
+}
+
+.form-container input[type="text"]:focus,
+.form-container textarea.detailed-expectations-textarea:focus {
+    border-color: var(--color-primary);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(var(--color-primary-rgb), 0.25);
+}
+
+.form-container div small {
+    font-size: 0.8rem;
+    color: #666;
+    margin-top: 0.3rem;
+    display: block;
+}
+
+.form-container .btn-primary {
+    align-self: flex-start;
+    padding: 0.75rem 2rem;
+    font-size: 1.05rem;
+    margin-top: 0.5rem;
+}
+
+/* ==========================
+Career Tips Page Styles
+========================== */
+.career-tips-container {
+    display: block; /* Or flex-column if needed for layout */
+    margin-top: 1.5rem; /* Add some space at the top */
+}
+
+.career-tips-container h2 {
+    text-align: center;
+    font-size: 2.25rem; /* Match recommendations H2 */
+    color: var(--color-text); /* Using text color for consistency with page titles */
+    margin-bottom: 1.5rem; /* Space below heading */
+}
+
+/* Style for the sector selection area */
+.sector-selector {
+    margin: 1rem 0 2rem 0; /* Space above and below the selector */
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Space between label and select */
+    font-size: 1rem;
+    color: var(--color-text);
+    justify-content: center; /* Center the selector block */
+    flex-wrap: wrap; /* Allow wrapping on small screens */
+}
+
+.sector-selector label {
+    font-weight: 600;
+}
+
+/* Style for the select dropdown */
+.sector-select {
+    padding: 0.5rem 0.75rem;
+    border: 1px solid #d1d5db;
+    border-radius: calc(var(--radius) / 2); /* Match other input styles */
+    font-size: 1rem;
+    color: var(--color-text);
+    background-color: #fff;
+    cursor: pointer;
+    transition: border-color var(--transition), box-shadow var(--transition);
+    font-family: inherit;
+    min-width: 150px; /* Give it a reasonable minimum width */
+}
+
+.sector-select:focus {
+    border-color: var(--color-primary);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(var(--color-primary-rgb), 0.25);
+}
+
+
+/* Messages (Loading, Error, No Results) */
+.loading-message,
+.error-message,
+.no-results-message {
+    text-align: center;
+    font-size: 1.1rem;
+    padding: 1.5rem 1rem;
+    border-radius: var(--radius);
+    margin-top: 1rem;
+    margin-bottom: 1rem; /* Add bottom margin */
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    background-color: var(--color-card); /* Default background */
+}
+
+.error-message {
+    background-color: var(--color-error-bg);
+    color: var(--color-error-text);
+    border: 1px solid var(--color-error-border);
+    font-weight: 500;
+}
+.no-results-message {
+     color: #555; /* Slightly muted color */
+}
+
+
+/* Job Listing styles (reused for career tips cards) */
+.jobs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); /* Responsive grid */
+    gap: 1.75rem;
+    margin-top: 1rem; /* Space above the grid */
+}
+
+.job-card {
+    background-color: var(--color-card);
+    border-radius: var(--radius);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.07);
+    display: flex; /* Use flex for layout within the card */
+    flex-direction: column;
+    transition: transform var(--transition), box-shadow var(--transition);
+    overflow: hidden; /* Important for rounded corners with internal elements */
+    height: 100%; /* Make cards equal height in the grid */
+}
+
+.job-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+/* This is the container for the main text content within the card */
+.job-card-content {
+    padding: 1.5rem; /* Increased padding slightly for better look */
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1; /* Allows content area to take up available space */
+}
+
+.job-card-content h3 {
+    font-size: 1.3rem;
+    color: var(--color-primary);
+    margin-bottom: 0.5rem;
+}
+
+/* This style is specifically for the description text block */
+.job-card-description {
+    font-size: 0.95rem; /* Slightly larger font for readability */
+    color: #444;
+    margin: 0.5rem 0 0 0; /* Adjusted margin - top space, no bottom */
+    line-height: 1.6; /* Increased line height */
+    flex-grow: 1; /* Allows the description to fill space */
+}
+/* Ensure the description paragraph itself doesn't have extra bottom margin */
+.job-card-description p {
+     margin: 0;
+}
+
+/* --- The following styles might not be needed for CareerTips cards,
+       but are kept for completeness of the original CSS --- */
+.job-card-logo {
+    flex-shrink: 0;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-height: 100px;
+}
+.job-card-logo img {
+    max-width: 100%;
+    max-height: 70px;
+    object-fit: contain;
+    border-radius: calc(var(--radius) / 2);
+}
+.job-card-content .job-company,
+.job-card-content .job-location {
+    font-size: 0.9rem;
+    color: #555;
+    margin-bottom: 0.25rem;
+}
+.job-card-content .job-company strong,
+.job-card-content .job-location strong {
+    color: var(--color-text);
+}
+.job-relevance-notes {
+    background-color: #eef7ff;
+    border-left: 3px solid var(--color-primary);
+    padding: 0.75rem 1rem;
+    margin: 0.75rem 0;
+    font-size: 0.85rem;
+    color: #334155;
+    border-radius: 0 calc(var(--radius)/2) calc(var(--radius)/2) 0;
+}
+.job-relevance-notes p { margin: 0; }
+.job-relevance-notes strong {
+    color: var(--color-primary);
+    font-weight: 600;
+}
+.job-skills {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+.job-skills strong {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: 0.5rem;
+}
+.skill-badge {
+    background-color: var(--color-bg);
+    color: var(--color-primary);
+    padding: 0.3rem 0.75rem;
+    border-radius: 15px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    border: 1px solid var(--color-primary);
+    transition: background-color var(--transition), color var(--transition);
+    display: inline-block;
+    margin-right: 0.4rem;
+    margin-bottom: 0.4rem;
+}
+.skill-badge:hover {
+    background-color: var(--color-primary);
+    color: white;
+}
+.job-link {
+    display: inline-block;
+    margin-top: 1rem; /* Ensure space above the link */
+    padding: 0.6rem 1.25rem;
+    background-color: var(--color-primary);
+    color: #fff;
+    border-radius: calc(var(--radius) / 1.5);
+    text-align: center;
+    font-weight: 600;
+    align-self: flex-start; /* Align button to the left */
+    transition: background-color var(--transition), transform var(--transition);
+    text-decoration: none;
+}
+.job-link:hover {
+    background-color: var(--color-secondary);
+    color: var(--color-text);
+    text-decoration: none;
+    transform: translateY(-1px);
+}
+
+
+/* ==========================
+ChatBot Styles - Corrected
+========================== */
+.chatbot-container {
+    background-color: transparent; /* Main container has no background */
+    box-shadow: none;
+    border-radius: 0;
+    padding: 1rem 0; /* Vertical padding within app-main */
+    margin-top: 2.5rem;
+    margin-bottom: 2.5rem;
+    width: 100%; /* Takes full width of parent .app-main */
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem; /* Gap between title/subtitle, chat window, and form */
+}
+
+.chatbot-container h2 {
+    text-align: center;
+    font-size: 2.25rem; /* Consistent with other page titles */
+    color: var(--color-text); /* Using text color for consistency */
+    margin-bottom: 0.75rem; /* Adjusted margin */
+    font-weight: 600;
+}
+.chatbot-container .page-subtitle { /* Style for the subtitle paragraph */
+     text-align: center;
+     color: #555;
+     font-size: 1.05rem;
+     margin-bottom: 1.5rem; /* Space below subtitle */
+}
+
+
+/* Corrected chat window styles: Transparent background, no border/shadow */
+.chat-window {
+    height: 400px; /* Fixed height */
+    overflow-y: auto; /* Enable scrolling */
+    padding: 0.5rem; /* Padding inside the scrollable area - needed for space around messages */
+    background-color: transparent; /* Make background transparent */
+    border: none; /* Remove border */
+    border-radius: 0; /* Remove border-radius */
+    display: flex;
+    flex-direction: column;
+    gap: 1rem; /* Space between messages */
+    box-shadow: none; /* Remove shadow */
+    position: relative;
+    padding-bottom: 1rem; /* Keep bottom padding for last message visibility */
+    /* Optional: Limit width and center the chat window area */
+     min-width: 700px;
+     margin-left: auto;
+     margin-right: auto;
+}
+
+.chat-entry {
+    padding: 0.85rem 1.35rem;
+    border-radius: 18px;
+    max-width: 78%; /* Max width for messages */
+    line-height: 1.55;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.07); /* Keep message bubble shadow */
+    word-wrap: break-word;
+    position: relative;
+    /* Remove margin-bottom here, use gap in .chat-window instead */
+    margin-bottom: 0;
+}
+
+.chat-entry strong {
+    display: block;
+    margin-bottom: 0.4rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.75px;
+    opacity: 0.85;
+}
+
+/* Style for Markdown lists within chat entries */
+.chat-entry div[data-is-markdown="true"] ul {
+    list-style: disc;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    padding-left: 1.5rem;
+}
+.chat-entry div[data-is-markdown="true"] ol {
+    list-style: decimal;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    padding-left: 1.5rem;
+}
+
+/* Add space between the bullet/number and the list item text */
+.chat-entry div[data-is-markdown="true"] li {
+    padding-left: 0.5rem;
+    margin: 0;
+    list-style-position: outside;
+}
+/* Style for paragraphs within markdown content */
+.chat-entry div[data-is-markdown="true"] p {
+     margin: 0.5rem 0;
+}
+
+
+.chat-entry.user {
+    background-color: var(--color-primary);
+    color: #fff;
+    align-self: flex-end;
+    border-top-left-radius: 18px;
+    border-top-right-radius: 18px;
+    border-bottom-left-radius: 18px;
+    border-bottom-right-radius: 6px; /* Tapered corner */
+}
+
+.chat-entry.user strong {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* Ensure all text content inside user bubble is white */
+.chat-entry.user p,
+.chat-entry.user li {
+    color: #fff;
+}
+
+.chat-entry.user a {
+    color: var(--color-secondary);
+    text-decoration: underline;
+    font-weight: 500;
+}
+.chat-entry.user a:hover {
+    color: #f0f0f0;
+}
+
+.chat-entry.bot {
+    background-color: #EDF2F7;
+    color: var(--color-text);
+    align-self: flex-start;
+    border-top-left-radius: 18px;
+    border-top-right-radius: 18px;
+    border-bottom-right-radius: 18px;
+    border-bottom-left-radius: 6px; /* Tapered corner */
+}
+
+.chat-entry.bot strong {
+    color: var(--color-primary);
+    opacity: 0.85;
+}
+/* Ensure all text content inside bot bubble uses the text color */
+.chat-entry.bot p,
+.chat-entry.bot li {
+    color: var(--color-text);
+}
+
+.chat-entry.bot a {
+    color: var(--color-primary);
+    text-decoration: underline;
+    font-weight: 500;
+}
+.chat-entry.bot a:hover {
+    color: var(--color-secondary);
+}
+
+/* Chat input form - Sleek bar design */
+.chat-form {
+    display: flex;
+    align-items: center;
+    background-color: var(--color-card); /* White background for the input bar */
+    border-radius: 28px; /* Fully rounded bar */
+    padding: 0.5rem 0.6rem 0.5rem 1.25rem; /* Left padding for text, right for button */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08); /* Subtle shadow for the bar */
+    border: 1px solid #e8eaed; /* Light border for definition FOR THE BAR ITSELF */
+    margin-top: 1rem;
+    transition: border-color var(--transition), box-shadow var(--transition);
+    /* Limit width and center the form */
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50rem;
+}
+
+.chat-form:focus-within {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3.5px rgba(var(--color-primary-rgb), 0.15), 0 4px 12px rgba(0,0,0,0.08);
+}
+
+/* Corrected input field appearance */
+.chat-form .chat-input {
+    flex-grow: 1; /* Allows the input to take up available space */
+    padding: 0.8rem 0.25rem; /* Increased vertical padding */
+    border: none;  /* CRITICAL: Removes any border from the input field itself */
+    background-color: transparent; /* CRITICAL: Makes the input field background transparent */
+    font-size: 0.95rem;
+    color: var(--color-text);
+    font-family: inherit;
+    outline: none; /* Removes the default browser focus outline */
+    line-height: 1.5; /* Ensure line height is normal */
+}
+
+.chat-form .chat-input::placeholder {
+    color: #8a919f;
+    opacity: 1; /* Ensure placeholder is visible */
+}
+
+.chat-form button {
+    padding: 0.7rem 1.5rem;
+    background: var(--color-primary);
+    color: #fff;
+    border: none; /* Button also has no border */
+    border-radius: 22px; /* Rounded to fit nicely inside the bar */
+    font-weight: 500;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: background 0.2s ease-out, transform 0.15s ease-out;
+    margin-left: 0.5rem; /* Space between input and button */
+    white-space: nowrap; /* Prevent button text from wrapping */
+}
+
+.chat-form button:hover:not(:disabled) {
+    background: var(--color-secondary);
+    color: var(--color-text); /* Or keep white if secondary gradient is light */
+    transform: scale(1.02);
+}
+.chat-form button:disabled {
+    background-color: #b0bec5;
+    color: #78909c;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+    opacity: 0.8;
+}
+
+/* Scrollbars for chat window */
+.chat-window::-webkit-scrollbar {
+    width: 7px;
+}
+.chat-window::-webkit-scrollbar-track {
+    background: rgba(0,0,0,0.03);
+    border-radius: 4px;
+    /* margin: 5px 0; Adjust margin if needed */
+}
+.chat-window::-webkit-scrollbar-thumb {
+    background-color: #c8cdd3;
+    border-radius: 4px;
+}
+.chat-window::-webkit-scrollbar-thumb:hover {
+    background-color: #afb4ba;
+}
+
+
+/* ==========================
+Scrollbars & Responsive
+========================== */
+/* Global Scrollbars */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+::-webkit-scrollbar-thumb {
+    background-color: #c1c1c1;
+    border-radius: 5px;
+    border: 2px solid #f1f1f1;
+}
+::-webkit-scrollbar-thumb:hover {
+    background-color: #a8a8a8;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .app-header {
+        padding: 1.5rem 0;
+        min-height: 120px;
+    }
+     .app-header h1 { font-size: 2rem; }
+     .app-header p { font-size: 1rem; }
+
+    .hero {
+        padding: 2rem 1.5rem;
+        flex-direction: column;
+    }
+    .hero-content h1 { font-size: 2.25rem; }
+    .hero-content p { font-size: 1.1rem; }
+    .features { grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: 1.5rem; } /* Adjust feature grid */
+
+    .jobs-grid {
+        grid-template-columns: 1fr; /* Stack cards on small screens */
+        gap: 1.5rem; /* Adjust gap */
+    }
+    .job-card-content { padding: 1.2rem; } /* Adjust card padding */
+    .job-card-content h3 { font-size: 1.2rem; }
+    .job-card-description { font-size: 0.9rem; line-height: 1.5; }
+
+
+    .form-container { padding: 1.5rem; gap: 1rem; }
+    .recommendations-container h2,
+    .career-tips-container h2 {
+        font-size: 2rem;
+    }
+    .page-subtitle { font-size: 1rem; margin-bottom: 2rem; }
+
+    .navbar {
+        gap: 0.75rem; /* Reduce navbar gap */
+        padding: 0.6rem 1.2rem;
+        border-radius: 12px;
+    }
+    .navbar a {
+        padding: 0.4rem 1rem;
+        border-radius: 8px;
+        font-size: 0.95rem;
+    }
+
+    /* Career Tips Specific Responsive */
+    .sector-selector {
+        margin: 0.75rem 0 1.5rem 0; /* Adjust margin */
+        flex-direction: column; /* Stack label and select vertically */
+        align-items: flex-start; /* Align items to the left */
+        gap: 5px; /* Reduce gap when stacked */
+    }
+    .sector-selector label { width: 100%; text-align: center; } /* Center label when stacked */
+    .sector-select { width: 100%; min-width: auto; text-align: center; } /* Make select full width */
+
+
+    /* ChatBot Responsive */
+    .chatbot-container {
+        padding: 1rem 0;
+        margin: 1.5rem auto;
+        gap: 1rem; /* Adjust gap */
+    }
+    .chatbot-container h2 {
+        font-size: 1.8rem; /* Adjusted size */
+        margin-bottom: 0.5rem;
+    }
+    .chatbot-container .page-subtitle {
+        font-size: 1rem;
+        margin-bottom: 1rem;
+    }
+    .chat-window {
+        height: 350px;
+        padding: 0.5rem; /* Adjusted padding */
+        gap: 0.75rem; /* Adjusted gap */
+         max-width: 95%; /* Increase max width on tablet */
+    }
+    .chat-entry {
+        max-width: 90%; /* Increased max width */
+        padding: 0.75rem 1.15rem;
+        border-radius: 16px; /* Adjusted radius */
+    }
+    .chat-entry.user { border-bottom-right-radius: 5px; } /* Adjust tapered corner */
+    .chat-entry.bot { border-bottom-left-radius: 5px; } /* Adjust tapered corner */
+
+
+    .chat-form {
+        padding: 0.4rem 0.5rem 0.4rem 1rem;
+        margin-top: 1rem; /* Keep some margin */
+        max-width: 95%; /* Reduce max width */
+    }
+    .chat-form .chat-input {
+        font-size: 0.9rem;
+        padding-top: 0.6rem; /* Adjusted padding */
+        padding-bottom: 0.6rem; /* Adjusted padding */
+        width: 100rem;
+    }
+    .chat-form button {
+        font-size: 0.9rem;
+        padding: 0.6rem 1.2rem;
+        margin-left: 0.4rem;
+    }
+
+     /* Responsive adjustment for list padding on ul/ol */
+     .chat-entry div[data-is-markdown="true"] ul,
+     .chat-entry div[data-is-markdown="true"] ol {
+         padding-left: 1.2rem; /* Slightly less indent on smaller screens */
+     }
+     /* Responsive adjustment for space after bullet */
+     .chat-entry div[data-is-markdown="true"] li {
+         padding-left: 0.4rem;
+     }
+}
+
+@media (max-width: 600px) {
+    .app-main {
+        padding: 1.5rem 0.8rem; /* Reduce horizontal padding */
+    }
+     .app-header { padding: 1.2rem 0; min-height: 100px; }
+     .app-header h1 { font-size: 1.8rem; }
+     .app-header p { font-size: 0.9rem; }
+
+
+    .hero { padding: 1.5rem; gap: 1.5rem; }
+    .hero-content h1 { font-size: 2rem; }
+    .hero-content p { font-size: 1rem; }
+
+    .features  { grid-template-columns: 1fr; gap: 1rem;} /* Stack features */
+    .feature-card { padding: 1.5rem 1rem; }
+
+    .recommendations-container h2,
+    .career-tips-container h2 {
+        font-size: 1.8rem;
+        margin-bottom: 1rem;
+    }
+     .recommendations-container p { margin-bottom: 1rem; } /* Adjust subtitle margin */
+     .page-subtitle { font-size: 0.95rem; margin-bottom: 1.5rem; }
+
+
+    .job-card-content { padding: 1rem; } /* Further reduce card padding */
+    .job-card-content h3 { font-size: 1.15rem; }
+    .job-card-description { font-size: 0.85rem; }
+
+
+    .form-container { padding: 1rem; gap: 0.8rem; }
+    .form-container .btn-primary { align-self: stretch; padding: 0.6rem 1.5rem; font-size: 1rem; }
+    .form-container input[type="text"],
+    .form-container textarea.detailed-expectations-textarea {
+        font-size: 0.9rem; padding: 0.6rem 0.8rem;
+    }
+    .form-container div small { font-size: 0.75rem; }
+
+    /* Career Tips Specific Responsive */
+    .sector-selector { margin: 0.5rem 0 1rem 0; gap: 3px; }
+    .sector-select { font-size: 0.95rem; padding: 0.4rem 0.6rem; }
+
+
+    /* ChatBot Responsive */
+    .chatbot-container { margin: 1rem auto; padding: 0.5rem 0; gap: 0.8rem;}
+    .chatbot-container h2 { font-size: 1.6rem; margin-bottom: 0.5rem;}
+    .chatbot-container .page-subtitle { font-size: 0.95rem; margin-bottom: 0.8rem;}
+
+    .chat-window { height: 280px; padding: 0.2rem; gap: 0.6rem; max-width: 100%;} /* Further reduce padding, allow full width */
+
+
+    .chat-form {
+        padding: 0.3rem 0.4rem 0.3rem 0.8rem;
+        margin-top: 0.75rem;
+        max-width: 100%; /* Allow full width on smallest screens */
+    }
+    .chat-form .chat-input {
+        font-size: 0.85rem;
+        padding-top: 0.5rem; /* Adjusted padding */
+        padding-bottom: 0.5rem; /* Adjusted padding */
+        width: 100rem;
+    }
+    .chat-form button {
+        font-size: 0.85rem;
+        padding: 0.55rem 1rem;
+        margin-left: 0.3rem;
+        border-radius: 20px; /* Adjust button radius */
+    }
+
+    .chat-entry {
+        max-width: 95%; /* Further increased max width */
+        padding: 0.6rem 0.9rem;
+        border-radius: 12px; /* Adjusted radius */
+    }
+     .chat-entry.user { border-bottom-right-radius: 4px; }
+     .chat-entry.bot { border-bottom-left-radius: 4px; }
+
+    /* Responsive Style for Markdown lists within chat entries */
+    .chat-entry div[data-is-markdown="true"] ul,
+    .chat-entry div[data-is-markdown="true"] ol {
+        padding-left: 0.8rem; /* Further adjust indentation */
+    }
+     /* Responsive adjustment for space after bullet */
+     .chat-entry div[data-is-markdown="true"] li {
+         padding-left: 0.2rem; /* Minimum space */
+     }
+}
